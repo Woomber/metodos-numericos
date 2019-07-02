@@ -24,5 +24,15 @@ namespace Metodos
         {
             return Math.Pow(Math.E, x) + Math.Pow(2, -x) + 2 * Math.Cos(x) - 6;
         }
+
+        public static double FuncSin2(double x)
+        {
+            return Math.Sin(x) + x - 2;
+        }
+
+        public static double FuncExp2(double x)
+        {
+            return x * Math.Pow(Math.E, x) - 1;
+        }
     }
 }

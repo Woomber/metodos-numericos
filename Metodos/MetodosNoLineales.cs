@@ -22,11 +22,10 @@ namespace Metodos
         {
             var currIntervalo = new Intervalo<double>(intervalo);
             double semisuma = 0.0;
-            double prevSemi = 0.0;
 
             for (int i = 0; i <= iterations; i++)
             {
-                prevSemi = semisuma;
+                double prevSemi = semisuma;
                 semisuma = (currIntervalo.inicio + currIntervalo.fin) / 2;
                 if (MismoSigno(f(currIntervalo.inicio), f(semisuma)))
                 {
@@ -46,6 +45,44 @@ namespace Metodos
             }
 
             return semisuma;
+        }
+
+        /// <summary>
+        /// Busca aproximaciones de raíces de una función a través del método de regla falsa.
+        /// Recibe un intervalo donde ocurre un cambio de signo en f(x).
+        /// </summary>
+        /// <param name="intervalo"></param>
+        /// <param name="f"></param>
+        /// <param name="iterations"></param>
+        /// <returns></returns>
+        public static double ReglaFalsa(Intervalo<double> intervalo, Func<double, double> f, int iterations)
+        {
+            var currIntervalo = new Intervalo<double>(intervalo);
+            double raizRegla = 0.0;
+
+            for (int i = 0; i <= iterations; i++)
+            {
+                double PrevRaiz = raizRegla;
+                double a = currIntervalo.inicio, b = currIntervalo.fin;
+                raizRegla = ( a*f(b) - b*f(a) ) / ( f(b) - f(a) );
+                if (MismoSigno(f(currIntervalo.inicio), f(raizRegla)))
+                {
+                    currIntervalo.inicio = raizRegla;
+                }
+                else
+                {
+                    currIntervalo.fin = raizRegla;
+                }
+
+
+                // Calculamos el Error
+                if (i == 0) continue;
+                ErrorAbsoluto = Math.Abs(raizRegla - PrevRaiz);
+                ErrorRelativo = ErrorAbsoluto / Math.Abs(raizRegla);
+
+            }
+
+            return raizRegla;
         }
 
         /// <summary>
