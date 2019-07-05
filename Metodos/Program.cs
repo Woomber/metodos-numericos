@@ -16,7 +16,7 @@ namespace Metodos
             // Parámetros
             Func<double, double> func = Funciones.FuncExp2;
             double inicioEval = -3, finEval = 3, step = 1;
-            int iteraciones = 3;
+            int iteraciones = 1000;
 
             // Obtenemos la tabla con los intervalos donde cambia de signo
             var intervalos = MetodosNoLineales.BuscarIntervalos(inicioEval, finEval, step, func);
@@ -40,6 +40,16 @@ namespace Metodos
                 Console.WriteLine($"Intervalo [{intervalo.inicio}, {intervalo.fin}]:");
                 Console.WriteLine($"Aproximación: {output}, Error relativo: { MetodosNoLineales.ErrorRelativo }");
             }
+
+            // Por Secante
+            Console.WriteLine("\n=== Secante ===");
+            foreach (Intervalo<double> intervalo in intervalos)
+            {
+                double output = MetodosNoLineales.Secante(intervalo, func, iteraciones);
+
+                Console.WriteLine($"Intervalo [{intervalo.inicio}, {intervalo.fin}]:");
+                Console.WriteLine($"Aproximación: {output}, Error relativo: { MetodosNoLineales.ErrorRelativo }");
+            }
         }
 
         static void Lineales()
@@ -50,7 +60,7 @@ namespace Metodos
                 { -1, 3, 20 },
             };
             double[] independientes = { 4, -8, 10 };
-            double epsilon = 0.0001;
+            double epsilon = 0.000;
             double[] iniciales = null, resultados;
 
             // Jacobi

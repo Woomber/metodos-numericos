@@ -51,8 +51,8 @@ namespace Metodos
         /// Busca aproximaciones de raíces de una función a través del método de regla falsa.
         /// Recibe un intervalo donde ocurre un cambio de signo en f(x).
         /// </summary>
-        /// <param name="intervalo"></param>
-        /// <param name="f"></param>
+        /// <param name="intervalo">El intervalo a evaluar, donde ocurre el cambio de signo</param>
+        /// <param name="f">La función a evaluar</param>
         /// <param name="iterations"></param>
         /// <returns></returns>
         public static double ReglaFalsa(Intervalo<double> intervalo, Func<double, double> f, int iterations)
@@ -83,6 +83,33 @@ namespace Metodos
             }
 
             return raizRegla;
+        }
+
+        /// <summary>
+        /// Busca aproximaciones de raíces de una función a través del método de secante.
+        /// Recibe un intervalo donde ocurre un cambio de signo en f(x).
+        /// </summary>
+        /// <param name="intervalo">El intervalo a evaluar, donde ocurre el cambio de signo</param>
+        /// <param name="f">La función a evaluar</param>
+        /// <param name="iterations">El número de iteraciones que se van a realizar para la aproximación</param>
+        /// <returns></returns>
+        public static double Secante(Intervalo<double> intervalo, Func<double, double> f, int iterations)
+        {
+            double raiz = intervalo.fin, raizAnt = intervalo.inicio;
+
+            for(int i = 2; i <= iterations; i++)
+            {
+                if (f(raiz) - f(raizAnt) == 0) break;
+                double raizNueva = raiz - (f(raiz) * (raiz - raizAnt)) / ( f(raiz) - f(raizAnt) );
+                raizAnt = raiz;
+                raiz = raizNueva;
+
+                ErrorAbsoluto = Math.Abs(raiz - raizAnt);
+                ErrorRelativo = ErrorAbsoluto / Math.Abs(raiz);
+            }
+
+            return raiz;
+
         }
 
         /// <summary>
