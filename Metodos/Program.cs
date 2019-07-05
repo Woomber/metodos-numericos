@@ -7,6 +7,12 @@ namespace Metodos
     {
         static void Main(string[] args)
         {
+            NoLineales();
+            Lineales();
+        }
+
+        static void NoLineales()
+        {
             // Parámetros
             Func<double, double> func = Funciones.FuncExp2;
             double inicioEval = -3, finEval = 3, step = 1;
@@ -34,6 +40,42 @@ namespace Metodos
                 Console.WriteLine($"Intervalo [{intervalo.inicio}, {intervalo.fin}]:");
                 Console.WriteLine($"Aproximación: {output}, Error relativo: { MetodosNoLineales.ErrorRelativo }");
             }
+        }
+
+        static void Lineales()
+        {
+            double[,] input = {
+                { 10, 3, -1 },
+                { 1, -15, 2 },
+                { -1, 3, 20 },
+            };
+            double[] independientes = { 4, -8, 10 };
+            double epsilon = 0.0001;
+            double[] iniciales = null, resultados;
+
+            // Jacobi
+
+            resultados = MetodosLineales.Jacobi(input, independientes, epsilon, iniciales);
+
+            Console.WriteLine("\n=== Jacobi ===");
+            for (int i = 0; i < resultados.Length; i++)
+            {
+                Console.WriteLine($"x{i + 1}: {resultados[i]}");
+            }
+            Console.WriteLine($"\nResuelto en {MetodosLineales.nIteraciones} iteraciones");
+
+
+            // Gauss-Seidel 
+
+            resultados = MetodosLineales.GaussSeidel(input, independientes, epsilon, iniciales);
+
+            Console.WriteLine("\n=== Gauss-Seidel ===");
+            for(int i = 0; i  < resultados.Length; i++)
+            {
+                Console.WriteLine($"x{i + 1}: {resultados[i]}");
+            }
+            Console.WriteLine($"\nResuelto en {MetodosLineales.nIteraciones} iteraciones");
+
         }
     }
 }
