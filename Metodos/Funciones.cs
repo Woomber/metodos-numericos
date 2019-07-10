@@ -34,5 +34,20 @@ namespace Metodos
         {
             return x * Math.Pow(Math.E, x) - 1;
         }
+
+        public static double FuncParticula(double t)
+        {
+            return 34.78 * (1 - Math.Exp(-0.54 * t));
+        }
+
+        public static double FuncRaizReciproca(double x)
+        {
+            return Math.Exp(-x * x / 2) / Math.Sqrt(2 * Math.PI);
+        }
+
+        public static double FuncRaizConCubo(double x)
+        {
+            return Math.Sqrt(x * x * x + 4);
+        }
     }
 }

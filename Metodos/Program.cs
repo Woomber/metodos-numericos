@@ -9,6 +9,7 @@ namespace Metodos
         {
             NoLineales();
             Lineales();
+            CalculoNumerico();
         }
 
         static void NoLineales()
@@ -86,6 +87,17 @@ namespace Metodos
             }
             Console.WriteLine($"\nResuelto en {MetodosLineales.nIteraciones} iteraciones");
 
+        }
+
+        static void CalculoNumerico()
+        {
+            Console.WriteLine("\n=== Diferenciación e integración numérica ===");
+
+            double resD = Calculo.Derivar(Funciones.FuncParticula, 5);
+            Console.WriteLine($"Derivada: {resD}");
+
+            double resI = Calculo.IntegrarRect(Funciones.FuncRaizConCubo, new Intervalo<double>(0, 2), 4);
+            Console.WriteLine($"Integral: {resI}");
         }
     }
 }
