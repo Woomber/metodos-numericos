@@ -7,3 +7,13 @@ Programa en C# que implementa algunos métodos numéricos.
 ### Solución de Ecuaciones no lineales
 - Método de Bisección
 - Método de Regla Falsa
+- Método de la Secante
+
+### Solución de Sistema de Ecuaciones Lineales
+- Método de Jacobi
+- Método de Gauss-Seidel
+
+### Diferenciación e integración numérica
+- Derivada por aproximación a definición
+- Integral definida por Newton-Cotes
+  - Por rectángulos
