@@ -8,8 +8,9 @@ Programa en C# que implementa algunos métodos numéricos.
 - Método de Bisección
 - Método de Regla Falsa
 - Método de la Secante
+- Método de Newton-Raphson
 
-### Solución de Sistema de Ecuaciones Lineales
+### Solución de Sistemas de Ecuaciones Lineales
 - Método de Jacobi
 - Método de Gauss-Seidel
 
