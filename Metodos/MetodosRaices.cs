@@ -4,7 +4,7 @@ using Metodos.Types;
 
 namespace Metodos
 {
-    static class MetodosNoLineales
+    static class MetodosRaices
     {
 
         public static double ErrorAbsoluto { get; set; }
@@ -17,7 +17,7 @@ namespace Metodos
         /// <param name="intervalo">El intervalo a evaluar, donde ocurre el cambio de signo</param>
         /// <param name="f">La función a evaluar</param>
         /// <param name="iterations">El número de iteraciones que se van a realizar para la aproximación</param>
-        /// <returns></returns>
+        /// <returns>Una aproximación a la raíz de la función</returns>
         public static double Biseccion(Intervalo<double> intervalo, Func<double, double> f, int iterations)
         {
             var currIntervalo = new Intervalo<double>(intervalo);
@@ -54,7 +54,7 @@ namespace Metodos
         /// <param name="intervalo">El intervalo a evaluar, donde ocurre el cambio de signo</param>
         /// <param name="f">La función a evaluar</param>
         /// <param name="iterations"></param>
-        /// <returns></returns>
+        /// <returns>Una aproximación a la raíz de la función</returns>
         public static double ReglaFalsa(Intervalo<double> intervalo, Func<double, double> f, int iterations)
         {
             var currIntervalo = new Intervalo<double>(intervalo);
@@ -92,7 +92,7 @@ namespace Metodos
         /// <param name="intervalo">El intervalo a evaluar, donde ocurre el cambio de signo</param>
         /// <param name="f">La función a evaluar</param>
         /// <param name="iterations">El número de iteraciones que se van a realizar para la aproximación</param>
-        /// <returns></returns>
+        /// <returns>Una aproximación a la raíz de la función</returns>
         public static double Secante(Intervalo<double> intervalo, Func<double, double> f, int iterations)
         {
             double raiz = intervalo.fin, raizAnt = intervalo.inicio;
@@ -110,6 +110,31 @@ namespace Metodos
 
             return raiz;
 
+        }
+
+        /// <summary>
+        /// Busca aproximaciones de raíces de una función a través del método de Newton-Raphson.
+        /// Recibe un valor inicial de x para comenzar el cálculo.
+        /// </summary>
+        /// <param name="f">La función a evaluar</param>
+        /// <param name="x0">El valor inicial de x</param>
+        /// <param name="iterations">El número de iteraciones a realizar para la aproximación</param>
+        /// <returns>Una aproximación a la raíz de la función</returns>
+        public static double NewtonRaphson(Func<double, double> f, double x0, int iterations)
+        {
+            double raiz = x0;
+
+            for(int i = 1; i <= iterations; i++)
+            {
+                double raizAnt = raiz;
+
+                raiz -= f(raiz) / Calculo.Derivar(f, raiz);
+
+                ErrorAbsoluto = Math.Abs(raiz - raizAnt);
+                ErrorRelativo = ErrorAbsoluto / Math.Abs(raiz);
+            }
+
+            return raiz;
         }
 
         /// <summary>

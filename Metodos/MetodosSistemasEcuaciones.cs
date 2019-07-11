@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Metodos
 {
-    class MetodosLineales
+    class MetodosSistemasEcuaciones
     {
 
         public static int nIteraciones { get; set; }
